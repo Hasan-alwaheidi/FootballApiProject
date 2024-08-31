@@ -1,0 +1,40 @@
+﻿@using ConsumeFootballApi.Models.Dtos
+@model UpdateLeagueDto
+
+<h2>Edit League</h2>
+
+<form asp-action="Edit" enctype="multipart/form-data">
+    <input type="hidden" asp-for="LeagueId" />
+
+    <div class="form-group">
+        <label asp-for="Name"></label>
+        <input asp-for="Name" class="form-control" />
+        <span asp-validation-for="Name" class="text-danger"></span>
+    </div>
+
+    <div class="form-group">
+        <label asp-for="Country"></label>
+        <input asp-for="Country" class="form-control" />
+        <span asp-validation-for="Country" class="text-danger"></span>
+    </div>
+
+    <div class="form-group">
+        <label asp-for="Season"></label>
+        <input asp-for="Season" class="form-control" />
+        <span asp-validation-for="Season" class="text-danger"></span>
+    </div>
+
+    <div class="form-group">
+        <label asp-for="Logo"></label>
+        <input type="file" asp-for="Logo" class="form-control-file" />
+        <span asp-validation-for="Logo" class="text-danger"></span>
+    </div>
+
+    <div class="form-group">
+        <label>Current Logo</label>
+        <img src="@Model.ExistingLogoPath" alt="League Logo" style="max-width: 150px;" />
+    </div>
+
+    <button type="submit" class="btn btn-primary">Save</button>
+    <a asp-action="Index" class="btn btn-secondary">Back to List</a>
+</form>

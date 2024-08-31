@@ -1,0 +1,46 @@
+﻿@using ConsumeFootballApi.Models.Dtos
+@using FootballApiProject.Enums
+@model CreateMatchDto
+
+<h2>Create Match</h2>
+
+<form asp-action="Create">
+    <div class="form-group">
+        <label asp-for="HomeTeamId"></label>
+        <input asp-for="HomeTeamId" class="form-control" />
+        <span asp-validation-for="HomeTeamId" class="text-danger"></span>
+    </div>
+
+    <div class="form-group">
+        <label asp-for="AwayTeamId"></label>
+        <input asp-for="AwayTeamId" class="form-control" />
+        <span asp-validation-for="AwayTeamId" class="text-danger"></span>
+    </div>
+
+    <div class="form-group">
+        <label asp-for="Date"></label>
+        <input asp-for="Date" class="form-control" />
+        <span asp-validation-for="Date" class="text-danger"></span>
+    </div>
+
+    <div class="form-group">
+        <label asp-for="Score"></label>
+        <input asp-for="Score" class="form-control" />
+        <span asp-validation-for="Score" class="text-danger"></span>
+    </div>
+
+    <div class="form-group">
+        <label asp-for="Result"></label>
+        <select asp-for="Result" class="form-control">
+            <option value="">Select Result</option>
+            @foreach (var result in Enum.GetValues(typeof(MatchResult)))
+            {
+                <option value="@result">@result</option>
+            }
+        </select>
+        <span asp-validation-for="Result" class="text-danger"></span>
+    </div>
+
+    <button type="submit" class="btn btn-primary">Save</button>
+    <a asp-action="Index" class="btn btn-secondary">Back to List</a>
+</form>

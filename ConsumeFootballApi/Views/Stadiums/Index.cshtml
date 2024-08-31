@@ -1,0 +1,50 @@
+﻿@using ConsumeFootballApi.Models.Dtos
+@model IEnumerable<StadiumDto>
+
+<h2>Stadiums</h2>
+
+<p>
+    <a asp-action="Create" class="btn btn-primary">Create New</a>
+</p>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>Name</th>
+            <th>Location</th>
+            <th>Capacity</th>
+            <th>Image</th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+        @if (Model != null && Model.Any())
+        {
+            @foreach (var stadium in Model)
+            {
+                <tr>
+                    <td>@stadium.Name</td>
+                    <td>@stadium.Location</td>
+                    <td>@stadium.Capacity</td>
+                    <td>
+                        @if (!string.IsNullOrEmpty(stadium.ImagePath))
+                        {
+                            <img src="@stadium.ImagePath" alt="Stadium Image" style="max-width: 100px;" />
+                        }
+                    </td>
+                    <td>
+                        <a asp-action="Edit" asp-route-id="@stadium.StadiumId" class="btn btn-warning">Edit</a>
+                        <a asp-action="Details" asp-route-id="@stadium.StadiumId" class="btn btn-info">Details</a>
+                        <a asp-action="Delete" asp-route-id="@stadium.StadiumId" class="btn btn-danger">Delete</a>
+                    </td>
+                </tr>
+            }
+        }
+        else
+        {
+            <tr>
+                <td colspan="5">No stadiums available.</td>
+            </tr>
+        }
+    </tbody>
+</table>

@@ -1,0 +1,45 @@
+﻿@using ConsumeFootballApi.Models.Dtos
+@model List<MatchDto>
+
+<h2>Matches</h2>
+
+<a asp-action="Create" class="btn btn-primary">Create New Match</a>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>Home Team</th>
+            <th>Away Team</th>
+            <th>Date</th>
+            <th>Score</th>
+            <th>Result</th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+        @if (Model != null && Model.Any())
+        {
+            foreach (var match in Model)
+            {
+                <tr>
+                    <td>@match.HomeTeamName</td>
+                    <td>@match.AwayTeamName</td>
+                    <td>@match.Date.ToString("dd/MM/yyyy HH:mm")</td>
+                    <td>@match.Score</td>
+                    <td>@match.Result</td>
+                    <td>
+                        <a asp-action="Edit" asp-route-id="@match.MatchId" class="btn btn-warning">Edit</a>
+                        <a asp-action="Details" asp-route-id="@match.MatchId" class="btn btn-info">Details</a>
+                        <a asp-action="Delete" asp-route-id="@match.MatchId" class="btn btn-danger">Delete</a>
+                    </td>
+                </tr>
+            }
+        }
+        else
+        {
+            <tr>
+                <td colspan="6">No matches available.</td>
+            </tr>
+        }
+    </tbody>
+</table>

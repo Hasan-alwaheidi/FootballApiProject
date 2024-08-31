@@ -1,0 +1,53 @@
+﻿@using ConsumeFootballApi.Models.Dtos
+@using FootballApiProject.Enums
+@model UpdatePlayerDto
+
+<h2>Edit Player</h2>
+
+<form asp-action="Edit" enctype="multipart/form-data">
+    <input type="hidden" asp-for="PlayerId" />
+
+    <div class="form-group">
+        <label asp-for="Name"></label>
+        <input asp-for="Name" class="form-control" />
+        <span asp-validation-for="Name" class="text-danger"></span>
+    </div>
+
+    <div class="form-group">
+        <label asp-for="Nationality"></label>
+        <input asp-for="Nationality" class="form-control" />
+        <span asp-validation-for="Nationality" class="text-danger"></span>
+    </div>
+
+    <div class="form-group">
+        <label asp-for="Position"></label>
+        <select asp-for="Position" class="form-control">
+            <option value="">Select Position</option>
+            @foreach (var position in Enum.GetValues(typeof(PlayerPosition)))
+            {
+                <option value="@position">@position</option>
+            }
+        </select>
+        <span asp-validation-for="Position" class="text-danger"></span>
+    </div>
+
+    <div class="form-group">
+        <label asp-for="TeamId"></label>
+        <input asp-for="TeamId" class="form-control" />
+        <span asp-validation-for="TeamId" class="text-danger"></span>
+    </div>
+
+    <div class="form-group">
+        <label asp-for="ProfilePicture"></label>
+        <input type="file" asp-for="ProfilePicture" class="form-control-file" />
+        <span asp-validation-for="ProfilePicture" class="text-danger"></span>
+    </div>
+
+    <div class="form-group">
+        <label>Current Profile Picture</label>
+        <img src="@Model.ExistingProfilePicturePath" alt="Player Picture" style="max-width: 150px;" />
+    </div>
+
+    <button type="submit" class="btn btn-primary">Save</button>
+    <a asp-action="Index" class="btn btn-secondary">Back to List</a>
+</form>

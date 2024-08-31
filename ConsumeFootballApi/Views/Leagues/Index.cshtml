@@ -1,0 +1,45 @@
+﻿@using ConsumeFootballApi.Models.Dtos
+@model List<LeagueDto>
+
+<h2>Leagues</h2>
+
+<a asp-action="Create" class="btn btn-primary">Create New League</a>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>Name</th>
+            <th>Country</th>
+            <th>Season</th>
+            <th>Logo</th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+        @if (Model != null && Model.Any())
+        {
+            foreach (var league in Model)
+            {
+                <tr>
+                    <td>@league.Name</td>
+                    <td>@league.Country</td>
+                    <td>@league.Season</td>
+                    <td>
+                        <img src="@league.LogoPath" alt="League Logo" style="max-width: 100px;" />
+                    </td>
+                    <td>
+                        <a asp-action="Edit" asp-route-id="@league.LeagueId" class="btn btn-warning">Edit</a>
+                        <a asp-action="Details" asp-route-id="@league.LeagueId" class="btn btn-info">Details</a>
+                        <a asp-action="Delete" asp-route-id="@league.LeagueId" class="btn btn-danger">Delete</a>
+                    </td>
+                </tr>
+            }
+        }
+        else
+        {
+            <tr>
+                <td colspan="5">No leagues available.</td>
+            </tr>
+        }
+    </tbody>
+</table>

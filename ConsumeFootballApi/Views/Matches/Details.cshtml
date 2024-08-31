@@ -1,0 +1,24 @@
+﻿@using ConsumeFootballApi.Models.Dtos
+@model MatchDto
+
+<h2>Match Details</h2>
+
+<dl class="row">
+    <dt class="col-sm-2">Home Team</dt>
+    <dd class="col-sm-10">@Model.HomeTeamName</dd>
+
+    <dt class="col-sm-2">Away Team</dt>
+    <dd class="col-sm-10">@Model.AwayTeamName</dd>
+
+    <dt class="col-sm-2">Date</dt>
+    <dd class="col-sm-10">@Model.Date.ToString("dd/MM/yyyy HH:mm")</dd>
+
+    <dt class="col-sm-2">Score</dt>
+    <dd class="col-sm-10">@Model.Score</dd>
+
+    <dt class="col-sm-2">Result</dt>
+    <dd class="col-sm-10">@Model.Result</dd>
+</dl>
+
+<a asp-action="Edit" asp-route-id="@Model.MatchId" class="btn btn-warning">Edit</a>
+<a asp-action="Index" class="btn btn-secondary">Back to List</a>

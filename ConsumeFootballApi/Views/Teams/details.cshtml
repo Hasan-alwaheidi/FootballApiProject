@@ -1,0 +1,17 @@
+﻿@model ConsumeFootballApi.Models.Dtos.TeamDto
+
+<h2>Team Details</h2>
+<div>
+    <h4>@Model.Name</h4>
+    <hr />
+    <dl class="row">
+        <dt class="col-sm-2">Coach</dt>
+        <dd class="col-sm-10">@Model.Coach</dd>
+        <dt class="col-sm-2">Logo</dt>
+        <dd class="col-sm-10"><img src="@Model.LogoPath" alt="Logo" style="width: 150px;" /></dd>
+    </dl>
+</div>
+<p>
+    <a asp-action="Edit" asp-route-id="@Model.TeamId">Edit</a> |
+    <a asp-action="Index">Back to List</a>
+</p>

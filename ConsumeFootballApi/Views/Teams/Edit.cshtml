@@ -1,0 +1,40 @@
+﻿@model ConsumeFootballApi.Models.Dtos.UpdateTeamDto
+
+<h2>Edit Team</h2>
+
+<form asp-action="Edit" enctype="multipart/form-data">
+    <input type="hidden" asp-for="TeamId" />
+    <div class="form-group">
+        <label asp-for="Name"></label>
+        <input asp-for="Name" class="form-control" />
+        <span asp-validation-for="Name" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="StadiumId"></label>
+        <input asp-for="StadiumId" class="form-control" />
+        <span asp-validation-for="StadiumId" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="LeagueId"></label>
+        <input asp-for="LeagueId" class="form-control" />
+        <span asp-validation-for="LeagueId" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="Coach"></label>
+        <input asp-for="Coach" class="form-control" />
+        <span asp-validation-for="Coach" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="Logo"></label>
+        <input asp-for="Logo" type="file" class="form-control" />
+        <span asp-validation-for="Logo" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="LogoPath">Existing Logo Path</label>
+        <input asp-for="LogoPath" class="form-control" readonly />
+    </div>
+    <button type="submit" class="btn btn-primary">Save</button>
+</form>
+<p>
+    <a asp-action="Index">Back to List</a>
+</p>
