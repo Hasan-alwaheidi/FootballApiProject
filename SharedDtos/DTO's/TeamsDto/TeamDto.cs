@@ -10,6 +10,8 @@
         public string LeagueName { get; set; }
         public int StadiumId { get; set; }  
         public int LeagueId { get; set; }
+        public string? Description { get; set; }  
+
 
     }
 }

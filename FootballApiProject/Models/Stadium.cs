@@ -12,5 +12,7 @@ namespace FootballApiProject.Models
         [JsonIgnore]
         public ICollection<Team> Teams { get; set; } = new List<Team>();
 
+        public string? Description { get; set; }
+
     }
 }

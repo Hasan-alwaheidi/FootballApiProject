@@ -11,5 +11,7 @@ namespace FootballApiProject.Models
         public string Nationality { get; set; }
         public string? ProfilePicturePath { get; set; }
         public Team Team { get; set; }
+
+        public string? Description { get; set; }
     }
 }

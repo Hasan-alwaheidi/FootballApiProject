@@ -10,7 +10,9 @@ namespace FootballApiProject.Models.DTO_s.PlayersDto
         public string Nationality { get; set; }
         public int TeamId { get; set; }
         public string TeamName { get; set; }
-        public string? ProfilePicturePath { get; set; } 
+        public string? ProfilePicturePath { get; set; }
+        public string? Description { get; set; }  // Add Description field
+
 
     }
 }

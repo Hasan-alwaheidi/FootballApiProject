@@ -10,5 +10,7 @@ namespace FootballApiProject.Models.DTO_s.StadiumsDto
         public int Capacity { get; set; }
         public string? ImagePath { get; set; }
         public ICollection<TeamDto> Teams { get; set; }
+        public string? Description { get; set; } 
+
     }
 }

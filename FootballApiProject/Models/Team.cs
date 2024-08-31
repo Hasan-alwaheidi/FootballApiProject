@@ -12,5 +12,6 @@
         [System.Text.Json.Serialization.JsonIgnore]
         public ICollection<Player> Players { get; set; }
         public string? LogoPath { get; set; }
+        public string? Description { get; set; }
     }
 }

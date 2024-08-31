@@ -7,6 +7,8 @@
         public string StadiumName { get; set; }
         public string LeagueName { get; set; }
         public string? LogoPath { get; set; } = "/images/default.jpg";
+        public string? Description { get; set; }  
+
     }
 
 }

@@ -10,5 +10,7 @@ namespace FootballApiProject.Models.DTO_s.LeaguesDto
         public string Season { get; set; }
         public string? LogoPath { get; set; }
         public List<TeamDto> Teams { get; set; }
+        public string? Description { get; set; }  
+
     }
 }

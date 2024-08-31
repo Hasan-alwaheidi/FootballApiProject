@@ -11,6 +11,8 @@ namespace FootballApiProject.Models.DTO_s.PlayersDto
         public string Nationality { get; set; }
         public int TeamId { get; set; }
         public string? ProfilePicturePath { get; set; }= "/images/players/playerAvatar.jpg";
+        public string? Description { get; set; } 
+
 
     }
 }

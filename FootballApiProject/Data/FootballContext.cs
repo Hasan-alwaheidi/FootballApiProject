@@ -15,7 +15,7 @@ namespace EndProject.Data
         public DbSet<Player> Players { get; set; }
         public DbSet<Stadium> Stadiums { get; set; }
         public DbSet<Match> Matches { get; set; }
-        public DbSet<News> NewsItems { get; set; }  
+        public DbSet<News> NewsItems { get; set; }
 
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
@@ -40,6 +40,9 @@ namespace EndProject.Data
                       .IsRequired()
                       .HasMaxLength(256);
 
+                entity.Property(e => e.Description)  // Add Description field
+                      .HasMaxLength(500);
+
                 entity.HasMany(e => e.Teams)
                       .WithOne(e => e.League)
                       .HasForeignKey(e => e.LeagueId)
@@ -61,6 +64,9 @@ namespace EndProject.Data
                 entity.Property(e => e.LogoPath)
                       .IsRequired()
                       .HasMaxLength(256);
+
+                entity.Property(e => e.Description)  // Add Description field
+                      .HasMaxLength(500);
 
                 entity.HasOne(e => e.Stadium)
                       .WithMany()
@@ -92,6 +98,9 @@ namespace EndProject.Data
                       .IsRequired()
                       .HasMaxLength(256);
 
+                entity.Property(e => e.Description)  // Add Description field
+                      .HasMaxLength(500);
+
                 entity.HasOne(e => e.Team)
                       .WithMany(e => e.Players)
                       .HasForeignKey(e => e.TeamId)
@@ -102,7 +111,7 @@ namespace EndProject.Data
             modelBuilder.Entity<Stadium>(entity =>
             {
                 modelBuilder.Entity<Stadium>()
-         .HasKey(s => s.StadiumId);
+                    .HasKey(s => s.StadiumId);
 
                 modelBuilder.Entity<Stadium>()
                     .Property(s => s.Name)
@@ -119,12 +128,15 @@ namespace EndProject.Data
                     .IsRequired();
 
                 modelBuilder.Entity<Stadium>()
+                    .Property(s => s.Description)  // Add Description field
+                    .HasMaxLength(500);
+
+                modelBuilder.Entity<Stadium>()
                     .HasMany(s => s.Teams)
                     .WithOne(t => t.Stadium)
                     .HasForeignKey(t => t.StadiumId)
                     .OnDelete(DeleteBehavior.Cascade);
             });
-
             // Configure Match
             modelBuilder.Entity<Match>(entity =>
             {

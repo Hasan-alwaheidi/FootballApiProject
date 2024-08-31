@@ -12,5 +12,7 @@ namespace FootballApiProject.Models.DTO_s.TeamsDto
         public string StadiumName { get; set; }
         public string LeagueName { get; set; }
         public ICollection<PlayerDto> Players { get; set; }
+        public string? Description { get; set; }
+
     }
 }

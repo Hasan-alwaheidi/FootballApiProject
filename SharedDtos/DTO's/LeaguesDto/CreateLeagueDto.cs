@@ -5,5 +5,7 @@ public class CreateLeagueDto
     public string Country { get; set; }
     public string Season { get; set; }
     public string? LogoPath { get; set; }
+    public string? Description { get; set; }
+
 
 }
