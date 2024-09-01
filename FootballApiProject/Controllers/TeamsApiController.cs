@@ -35,7 +35,9 @@ namespace FootballApiProject.Controllers.ApiControllers
                 Coach = t.Coach,
                 LogoPath = t.LogoPath,
                 StadiumName = t.Stadium.Name,
-                LeagueName = t.League.Name
+                LeagueName = t.League.Name,
+                Description = t.Description
+
             }).ToList();
 
             return Ok(teamsDto);
@@ -47,7 +49,7 @@ namespace FootballApiProject.Controllers.ApiControllers
             var team = await _context.Teams
                 .Include(t => t.Stadium)
                 .Include(t => t.League)
-                .Include(t => t.Players) // Include players in the team
+                .Include(t => t.Players) 
                 .FirstOrDefaultAsync(t => t.TeamId == id);
 
             if (team == null)
@@ -63,6 +65,7 @@ namespace FootballApiProject.Controllers.ApiControllers
                 LogoPath = team.LogoPath,
                 StadiumName = team.Stadium.Name,
                 LeagueName = team.League.Name,
+                Description = team.Description,
                 Players = team.Players.Select(p => new PlayerDto
                 {
                     PlayerId = p.PlayerId,
@@ -78,14 +81,12 @@ namespace FootballApiProject.Controllers.ApiControllers
         [HttpPost]
         public async Task<ActionResult<Team>> PostTeam([FromBody] CreateTeamDto dto)
         {
-            // Lookup the StadiumId based on the provided StadiumName
+           
             var stadium = await _context.Stadiums.FirstOrDefaultAsync(s => s.Name == dto.StadiumName);
             if (stadium == null)
             {
                 return BadRequest($"Stadium with name '{dto.StadiumName}' not found.");
             }
-
-            // Lookup the LeagueId based on the provided LeagueName
             var league = await _context.Leagues.FirstOrDefaultAsync(l => l.Name == dto.LeagueName);
             if (league == null)
             {
@@ -95,10 +96,11 @@ namespace FootballApiProject.Controllers.ApiControllers
             var team = new Team
             {
                 Name = dto.Name,
-                StadiumId = stadium.StadiumId, // Use the found StadiumId
-                LeagueId = league.LeagueId, // Use the found LeagueId
+                StadiumId = stadium.StadiumId, 
+                LeagueId = league.LeagueId, 
                 Coach = dto.Coach,
-                LogoPath = dto.LogoPath ?? "/images/default.jpg" // Use a default image if LogoPath is null
+                LogoPath = dto.LogoPath ?? "/images/default.jpg",
+                Description = dto.Description
             };
 
             _context.Teams.Add(team);
@@ -122,14 +124,11 @@ namespace FootballApiProject.Controllers.ApiControllers
                 return NotFound();
             }
 
-            // Lookup the StadiumId based on the provided StadiumName
             var stadium = await _context.Stadiums.FirstOrDefaultAsync(s => s.Name == dto.StadiumName);
             if (stadium == null)
             {
                 return BadRequest($"Stadium with name '{dto.StadiumName}' not found.");
             }
-
-            // Lookup the LeagueId based on the provided LeagueName
             var league = await _context.Leagues.FirstOrDefaultAsync(l => l.Name == dto.LeagueName);
             if (league == null)
             {
@@ -137,10 +136,11 @@ namespace FootballApiProject.Controllers.ApiControllers
             }
 
             team.Name = dto.Name;
-            team.StadiumId = stadium.StadiumId; // Use the found StadiumId
-            team.LeagueId = league.LeagueId; // Use the found LeagueId
+            team.StadiumId = stadium.StadiumId; 
+            team.LeagueId = league.LeagueId;
             team.Coach = dto.Coach;
-            team.LogoPath = dto.LogoPath ?? team.LogoPath; // Keep existing LogoPath if none provided
+            team.LogoPath = dto.LogoPath ?? team.LogoPath;
+            team.Description = dto.Description;
 
             _context.Entry(team).State = EntityState.Modified;
 
@@ -191,7 +191,8 @@ namespace FootballApiProject.Controllers.ApiControllers
                     .Where(l => l.LeagueId == team.LeagueId)
                     .Select(l => l.Name)
                     .FirstOrDefaultAsync(),
-                LogoPath = team.LogoPath
+                LogoPath = team.LogoPath,
+                Description = team.Description
             };
 
             patchDoc.ApplyTo(teamDto, ModelState);
@@ -201,26 +202,24 @@ namespace FootballApiProject.Controllers.ApiControllers
                 return ValidationProblem(ModelState);
             }
 
-            // Lookup the StadiumId based on the patched StadiumName
             var stadium = await _context.Stadiums.FirstOrDefaultAsync(s => s.Name == teamDto.StadiumName);
             if (stadium == null)
             {
                 return BadRequest($"Stadium with name '{teamDto.StadiumName}' not found.");
             }
 
-            // Lookup the LeagueId based on the patched LeagueName
             var league = await _context.Leagues.FirstOrDefaultAsync(l => l.Name == teamDto.LeagueName);
             if (league == null)
             {
                 return BadRequest($"League with name '{teamDto.LeagueName}' not found.");
             }
 
-            // Map the patched DTO back to the entity
             team.Name = teamDto.Name;
             team.Coach = teamDto.Coach;
-            team.StadiumId = stadium.StadiumId; // Use the found StadiumId
-            team.LeagueId = league.LeagueId; // Use the found LeagueId
+            team.StadiumId = stadium.StadiumId; 
+            team.LeagueId = league.LeagueId; 
             team.LogoPath = teamDto.LogoPath;
+            team.Description = teamDto.Description;
 
             _context.Entry(team).State = EntityState.Modified;
 

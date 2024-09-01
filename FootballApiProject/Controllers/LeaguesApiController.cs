@@ -32,6 +32,8 @@ namespace FootballApiProject.Controllers
                     Country = league.Country,
                     Season = league.Season,
                     LogoPath = league.LogoPath,
+                    Description = league.Description, 
+
                     Teams = league.Teams.Select(team => new TeamDto
                     {
                         TeamId = team.TeamId,
@@ -60,6 +62,8 @@ namespace FootballApiProject.Controllers
                 Country = league.Country,
                 Season = league.Season,
                 LogoPath = league.LogoPath,
+                Description = league.Description, 
+
                 Teams = league.Teams.Select(t => new TeamDto
                 {
                     TeamId = t.TeamId,
@@ -80,7 +84,9 @@ namespace FootballApiProject.Controllers
                 Name = createLeagueDto.Name,
                 Country = createLeagueDto.Country,
                 Season = createLeagueDto.Season,
-                LogoPath = createLeagueDto.LogoPath // Just save the path
+                LogoPath = createLeagueDto.LogoPath,
+                Description = createLeagueDto.Description
+
             };
 
             _context.Leagues.Add(league);
@@ -92,7 +98,8 @@ namespace FootballApiProject.Controllers
                 Name = league.Name,
                 Country = league.Country,
                 Season = league.Season,
-                LogoPath = league.LogoPath
+                LogoPath = league.LogoPath,
+                Description = league.Description
             };
 
             return CreatedAtAction(nameof(GetLeague), new { id = league.LeagueId }, leagueDto);
@@ -112,11 +119,11 @@ namespace FootballApiProject.Controllers
                 return NotFound();
             }
 
-            // Update properties
             league.Name = leagueDto.Name;
             league.Country = leagueDto.Country;
             league.Season = leagueDto.Season;
-            league.LogoPath = leagueDto.LogoPath; // Update the path
+            league.LogoPath = leagueDto.LogoPath;
+            league.Description = leagueDto.Description;
 
             _context.Entry(league).State = EntityState.Modified;
             await _context.SaveChangesAsync();
@@ -143,7 +150,8 @@ namespace FootballApiProject.Controllers
                 Name = league.Name,
                 Country = league.Country,
                 Season = league.Season,
-                LogoPath = league.LogoPath
+                LogoPath = league.LogoPath,
+                Description = league.Description
             };
 
             patchDoc.ApplyTo(leagueToPatch, ModelState);
@@ -157,6 +165,7 @@ namespace FootballApiProject.Controllers
             league.Country = leagueToPatch.Country;
             league.Season = leagueToPatch.Season;
             league.LogoPath = leagueToPatch.LogoPath;
+            league.Description = leagueToPatch.Description;
 
             await _context.SaveChangesAsync();
 

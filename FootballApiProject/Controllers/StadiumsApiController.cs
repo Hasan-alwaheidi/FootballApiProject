@@ -30,7 +30,8 @@ namespace FootballApiProject.Controllers.ApiControllers
                     Name = stadium.Name,
                     Location = stadium.Location,
                     Capacity = stadium.Capacity,
-                    ImagePath = stadium.ImagePath // Just return the path
+                    ImagePath = stadium.ImagePath,
+                    Description = stadium.Description
                 }).ToListAsync();
         }
 
@@ -53,6 +54,7 @@ namespace FootballApiProject.Controllers.ApiControllers
                 Location = stadium.Location,
                 Capacity = stadium.Capacity,
                 ImagePath = stadium.ImagePath,
+                Description = stadium.Description,
                 Teams = stadium.Teams.Select(t => new TeamDto
                 {
                     TeamId = t.TeamId,
@@ -74,7 +76,8 @@ namespace FootballApiProject.Controllers.ApiControllers
                 Name = createStadiumDto.Name,
                 Location = createStadiumDto.Location,
                 Capacity = createStadiumDto.Capacity,
-                ImagePath = createStadiumDto.ImagePath // Just save the path
+                ImagePath = createStadiumDto.ImagePath,
+                Description = createStadiumDto.Description
             };
 
             _context.Stadiums.Add(stadium);
@@ -100,7 +103,8 @@ namespace FootballApiProject.Controllers.ApiControllers
             stadium.Name = updateStadiumDto.Name;
             stadium.Location = updateStadiumDto.Location;
             stadium.Capacity = updateStadiumDto.Capacity;
-            stadium.ImagePath = updateStadiumDto.ImagePath; // Update the path
+            stadium.ImagePath = updateStadiumDto.ImagePath;
+            stadium.Description = updateStadiumDto.Description;
 
             _context.Entry(stadium).State = EntityState.Modified;
             await _context.SaveChangesAsync();
@@ -127,7 +131,8 @@ namespace FootballApiProject.Controllers.ApiControllers
                 Name = stadium.Name,
                 Location = stadium.Location,
                 Capacity = stadium.Capacity,
-                ImagePath = stadium.ImagePath
+                ImagePath = stadium.ImagePath,
+                Description = stadium.Description
             };
 
             patchDoc.ApplyTo(stadiumDto, ModelState);
@@ -141,6 +146,7 @@ namespace FootballApiProject.Controllers.ApiControllers
             stadium.Location = stadiumDto.Location;
             stadium.Capacity = stadiumDto.Capacity;
             stadium.ImagePath = stadiumDto.ImagePath;
+            stadium.Description = stadiumDto.Description;
 
             _context.Entry(stadium).State = EntityState.Modified;
 

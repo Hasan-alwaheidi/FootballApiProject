@@ -34,7 +34,9 @@ namespace FootballApiProject.Controllers.ApiControllers
                 Nationality = p.Nationality,
                 TeamId = p.TeamId,
                 TeamName = p.Team.Name,
-                ProfilePicturePath = p.ProfilePicturePath
+                ProfilePicturePath = p.ProfilePicturePath,
+                Description = p.Description
+
             }).ToList();
 
             return Ok(playersDto);
@@ -59,7 +61,8 @@ namespace FootballApiProject.Controllers.ApiControllers
                 Position = player.Position,
                 Nationality = player.Nationality,
                 ProfilePicturePath = player.ProfilePicturePath,
-                TeamName = player.Team.Name
+                TeamName = player.Team.Name,
+                Description = player.Description
             };
 
             return Ok(playerDetailsDto);
@@ -80,7 +83,9 @@ namespace FootballApiProject.Controllers.ApiControllers
                 Position = dto.Position,
                 Nationality = dto.Nationality,
                 TeamId = dto.TeamId,
-                ProfilePicturePath = dto.ProfilePicturePath ?? "/images/players/default.jpg"
+                ProfilePicturePath = dto.ProfilePicturePath ?? "/images/players/default.jpg",
+                Description = dto.Description
+                
             };
 
             _context.Players.Add(player);
@@ -115,6 +120,7 @@ namespace FootballApiProject.Controllers.ApiControllers
             player.Nationality = dto.Nationality;
             player.TeamId = dto.TeamId;
             player.ProfilePicturePath = dto.ProfilePicturePath ?? player.ProfilePicturePath;
+            player.Description = dto.Description;
 
             _context.Entry(player).State = EntityState.Modified;
 
@@ -158,7 +164,8 @@ namespace FootballApiProject.Controllers.ApiControllers
                 Position = player.Position,
                 Nationality = player.Nationality,
                 TeamId = player.TeamId,
-                ProfilePicturePath = player.ProfilePicturePath
+                ProfilePicturePath = player.ProfilePicturePath,
+                Description = player.Description
             };
 
             patchDoc.ApplyTo(playerDto, ModelState);
@@ -173,6 +180,7 @@ namespace FootballApiProject.Controllers.ApiControllers
             player.Nationality = playerDto.Nationality;
             player.TeamId = playerDto.TeamId;
             player.ProfilePicturePath = playerDto.ProfilePicturePath;
+            player.Description = playerDto.Description;
 
             _context.Entry(player).State = EntityState.Modified;
 

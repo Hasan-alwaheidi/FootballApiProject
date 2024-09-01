@@ -40,8 +40,8 @@ namespace EndProject.Data
                       .IsRequired()
                       .HasMaxLength(256);
 
-                entity.Property(e => e.Description)  // Add Description field
-                      .HasMaxLength(500);
+                entity.Property(e => e.Description)  
+                      .HasMaxLength(1500);
 
                 entity.HasMany(e => e.Teams)
                       .WithOne(e => e.League)
@@ -65,8 +65,8 @@ namespace EndProject.Data
                       .IsRequired()
                       .HasMaxLength(256);
 
-                entity.Property(e => e.Description)  // Add Description field
-                      .HasMaxLength(500);
+                entity.Property(e => e.Description)  
+                      .HasMaxLength(1500);
 
                 entity.HasOne(e => e.Stadium)
                       .WithMany()
@@ -98,8 +98,8 @@ namespace EndProject.Data
                       .IsRequired()
                       .HasMaxLength(256);
 
-                entity.Property(e => e.Description)  // Add Description field
-                      .HasMaxLength(500);
+                entity.Property(e => e.Description)  
+                      .HasMaxLength(1500);
 
                 entity.HasOne(e => e.Team)
                       .WithMany(e => e.Players)
@@ -128,8 +128,8 @@ namespace EndProject.Data
                     .IsRequired();
 
                 modelBuilder.Entity<Stadium>()
-                    .Property(s => s.Description)  // Add Description field
-                    .HasMaxLength(500);
+                    .Property(s => s.Description)  
+                    .HasMaxLength(1500);
 
                 modelBuilder.Entity<Stadium>()
                     .HasMany(s => s.Teams)
